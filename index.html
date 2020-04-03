@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- <link rel="manifest" href="/manifest.webmanifest"> -->
+
+    <link rel='stylesheet' href='/theme.css' />
+    <!-- <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet"> -->
+    <!-- <link rel="stylesheet" href="https://code.cdn.mozilla.net/fonts/fira.css"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
+    <script src="https://unpkg.com/swiper/js/swiper.js"></script>
+    <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#FECFBD">
+
+
+
+    <script>
+
+      fetch('https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@lic.ludmilaonorati')
+       .then((res) => res.json())
+       .then((data) => {
+          // Filter for acctual posts. Comments don't have categories, therefore can filter for items with categories bigger than 0
+          const res = data.items //This is an array with the content. No feed, no info about author etc..
+          const posts = res.filter(item => item.categories.length > 0) // That's the main trick* !
+
+          // Functions to create a short text out of whole blog's content
+          function toText(node) {
+             let tag = document.createElement('div')
+             tag.innerHTML = node
+             node = tag.innerText
+             return node
+          }
+          function shortenText(text,startingPoint ,maxLength) {
+             return text.length > maxLength?
+             text.slice(startingPoint, maxLength):
+             text
+          }
+
+          // Put things in right spots of markup
+          let output = '';
+          console.log(posts);
+          // posts.forEach((item) => {
+          //    output += `
+          //    <li class="blog__post">
+          //       <a href="${item.link}">
+          //          <img src="${item.thumbnail}" class="blog__topImg"></img>
+          //          <div class="blog__content">
+          //             <div class="blog_preview">
+          //                <h2 class="blog__title">${shortenText(item.title, 0, 30)+ '...'}</h2>
+          //                <p class="blog__intro">${'...' + shortenText(toText(item.content),60, 300)+ '...'}</p>
+          //             </div>
+          //             <hr>
+          //             <div class="blog__info">
+          //                <span class="blog__author">${item.author}</span>
+          //                <span class="blog__date">${shortenText(item.pubDate,0 ,10)}</span>
+          //             </div>
+          //          </div>
+          //       <a/>
+          //    </li>`
+          //
+          // })
+          // document.querySelector('.blog__slider').innerHTML = output
+      })
+
+      var scrolling = function(div) {
+        var opacity = Math.min(100, div.scrollTop/2) / 100;
+        // console.log(opacity);
+        // document.getElementById("header").style.backgroundColor = "rgba(255,255,255," + opacity + ")" // 254,207,189,1
+        document.getElementById("header").style.background = "linear-gradient(180deg, rgba(254,207,189," + opacity + ") 60%, rgba(0,0,0,0) 100%)"
+      }
+
+      var showMenu = function() {
+        document.getElementById("menu").className = "show";
+        document.getElementById("overlay").className = "show";
+      }
+      var hideMenu = function() {
+        document.getElementById("menu").className = "";
+        document.getElementById("overlay").className = "";
+      }
+
+      window.onload = function () {
+
+
+
+        // setTimeout(function() {
+        //   var metaThemeColor = document.querySelector("meta[name=theme-color]");
+        //   metaThemeColor.setAttribute("content", "#333333");
+        // }, 3000);
+
+        //initialize swiper when document ready
+        var mySwiper = new Swiper ('.swiper-container', {
+          // Optional parameters
+          // direction: 'vertical',
+          // cssMode: true,
+          loop: true,
+          // longSwipes: false,
+          followFinger: false,
+          // allowTouchMove: false,
+          parallax:true,
+          speed: 500,
+          // roundLengths: true
+        });
+
+        mySwiper.on('slideChange', function (event) {
+          console.log('slide changed', event, mySwiper.slides[mySwiper.activeIndex]);
+          scrolling(mySwiper.slides[mySwiper.activeIndex]);
+        });
+
+        console.log('all good', mySwiper);
+      };
+    </script>
+  </head>
+  <body>
+    <div class="header" id="header" onclick="showMenu()">
+      <img src="img/header.png" />
+    </div>
+    <div id="overlay"></div>
+    <div id="menu" onclick="hideMenu()">
+      <a href="#">Inicio</a>
+      <a href="#">Blog</a>
+      <a href="#">Contacto</a>
+      <a href="#">Reserva tu turno</a>
+    </div>
+    <!-- Slider main container -->
+    <div class="swiper-container">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+            <!-- Slides -->
+            <div class="swiper-slide" onscroll="scrolling(this)">
+              <img src="img/1.png" data-swiper-parallax-y="100" data-swiper-parallax-opacity="1" data-swiper-parallax-duration="600"/>
+              <div class="t1">
+                <div data-swiper-parallax-duration="900" data-swiper-parallax="-400">Terapia</div>
+                <div data-swiper-parallax-duration="900" data-swiper-parallax="-500">Online</div>
+              </div>
+              <div class="t2">
+                <div data-swiper-parallax-duration="900" data-swiper-parallax="-600">
+                <strong>¡No pongas más excusas!</strong> Si estás lejos, en otra ciudad o contás con poco tiempo, animate a las sesiones virtuales.
+                </div>
+                <a class="button" href="https://calendly.com/ludmila-onorati/terapia-online" data-swiper-parallax-duration="1000" data-swiper-parallax="-700">
+                  Reserva tu turno
+                </a>
+                <div data-swiper-parallax-duration="900" data-swiper-parallax="-700"></div>
+              </div>
+            </div>
+
+            <!-- -->
+
+            <div class="swiper-slide" onscroll="scrolling(this)">
+              <!-- <img src="img/2.png" data-swiper-parallax-y="100" data-swiper-parallax-opacity="1" data-swiper-parallax-duration="600"/> -->
+              <img src="img/2-girl.png" data-swiper-parallax-y="-100" data-swiper-parallax-duration="850" class="parallax-girl"/>
+              <img src="img/3.png" data-swiper-parallax-y="100" data-swiper-parallax-duration="850"/>
+              <div class="t1">
+                <div data-swiper-parallax-duration="900" data-swiper-parallax="-400">Ronda de</div>
+                <div data-swiper-parallax-duration="900" data-swiper-parallax="-500">mamás reales</div>
+              </div>
+              <div class="t2">
+                <div data-swiper-parallax-duration="900" data-swiper-parallax="-600">
+                  Desmitificamos la maternidad rosa y hablamos de hechos concretos que les pasan a las madres reales.<br/>
+                  Podés venir desde el embarazo, con tu bebé de hasta 2 años o sola.
+                </div>
+                <a class="button" href="https://calendly.com/ludmila-onorati/terapia-online" data-swiper-parallax-duration="1000" data-swiper-parallax="-700">
+                  Reserva tu turno
+                </a>
+              </div>
+            </div>
+
+            <!-- -->
+
+            <div class="swiper-slide" onscroll="scrolling(this)">
+              <img src="img/3-girl.png" data-swiper-parallax-y="-100" data-swiper-parallax-duration="850" class="parallax-girl"/>
+              <img src="img/3.png" data-swiper-parallax-y="100" data-swiper-parallax-duration="850"/>
+              <div class="t1">
+                <div data-swiper-parallax-duration="900" data-swiper-parallax="-400">Embarazo y</div>
+                <div data-swiper-parallax-duration="900" data-swiper-parallax="-500">Peurperio</div>
+              </div>
+              <div class="t2">
+                <div data-swiper-parallax-duration="900" data-swiper-parallax="-600">
+                Ambos son momentos donde la mujer atraviesa varios cambios y transformaciones. Por eso te acompaño durante la gestación de tu bebé, parto y puerperio, para que puedas reencontrarte, repensarte y conocerte.
+                </div>
+                <a class="button" href="https://calendly.com/ludmila-onorati/terapia-online" data-swiper-parallax-duration="1000" data-swiper-parallax="-700">
+                  Reserva tu turno
+                </a>
+              </div>
+            </div>
+
+            <!-- -->
+
+            <div class="swiper-slide green-bg">
+              <img src="img/4.png" data-swiper-parallax-y="200" data-swiper-parallax-opacity="1" data-swiper-parallax-duration="700"/>
+              <div class="t1">
+                <div data-swiper-parallax-duration="900" data-swiper-parallax="-400">Terapia</div>
+                <div data-swiper-parallax-duration="900" data-swiper-parallax="-500">Presencial</div>
+              </div>
+              <div class="t2">
+                <div data-swiper-parallax-duration="900" data-swiper-parallax="-600">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias placeat laudantium alias vitae saepe libero, suscipit sit nulla quis fuga.
+                <br/><br/>
+                </div>
+                <div data-swiper-parallax-duration="900" data-swiper-parallax="-700">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias placeat laudantium alias vitae saepe libero, suscipit sit nulla quis fuga voluptas sequi aspernatur culpa explicabo labore minima unde consequatur iure.
+                </div>
+              </div>
+            </div>
+
+            <!-- -->
+
+            <div class="swiper-slide" onscroll="scrolling(this)">
+              <img src="img/6.png" data-swiper-parallax-y="200" data-swiper-parallax-opacity="1" data-swiper-parallax-duration="700"/>
+              <div class="t1">
+                <div data-swiper-parallax-duration="900" data-swiper-parallax="-400">Un poco de</div>
+                <div data-swiper-parallax-duration="900" data-swiper-parallax="-500">mi historia...</div>
+              </div>
+              <div class="t2">
+                <div data-swiper-parallax-duration="900" data-swiper-parallax="-600">
+                  ¡Hola! Soy Ludmila Onorati, nací en Bahía Blanca donde realicé mis estudios terciarios
+                  para recibirme como Profesora de Psicología. Al finalizar la carrera decidí venir a Buenos
+                  Aires para continuar con mis estudios y poder obtener el título de Licenciada en Psicología.
+                  <br/><br/>
+                  Comencé trabajando en Recursos Humanos, pasé por distintas áreas: Selección de Personal,
+                  Capacitación y Desarrollo Organizacional. Mucho de lo que hoy soy se lo debo a esas
+                  experiencias...
+                  <br/><br/>
+                  En el medio de mi carrera profesional decidí ser mamá y de a poco mi perspectiva
+                  profesional fue cambiando.
+                  <br/><br/>
+                  Aposté a formarme en psicología clínica de adultos y adolescentes, una formación con
+                  orientación psicoanalítica. Actualmente soy miembro del staff de Fundación Buenos Aires,
+                  lo cual me permite trabajar a conciencia con mis pacientes, tener un espacio de supervisión
+                  y estar en contacto permanente con grandes colegas.
+                  <br/><br/>
+                  Además me formé en primera infancia y en maternidad, para poder acompañar a todas las
+                  mujeres y parejas en búsqueda de un hijo.
+                  <br/><br/>
+                  El embarazo es un proceso largo que conlleva varios cambios para la mujer y su entorno,
+                  por eso creo que contar con apoyo y contención psicológica es clave para estar mejor
+                  preparados y conectados con el bebé que viene en camino. 
+                  <br/><br/>
+                  Apuesto y adhiero a una crianza en tribu, es por eso que me sumé al equipo de MAMAM
+                  Red de Crianza, Coordinando el grupo de Abasto (a una cuadra del shopping) y también
+                  haciendo grupos en mi consultorio de Belgrano. Estar rodeadas de personas que entiendan
+                  por lo que estás pasando con el plus de que la mirada de una psicóloga organice el espacio,
+                  trayendo material científico, escuchando las subjetividades y situaciones particulares de
+                  cada una, pensando la mejor forma de crianza para vos y tu familia.
+                  <br/><br/>
+                  Si estás buscando alguien que te acompañe a transitar ese momento tan particular, en mi
+                  consultorio podrás encontrar un clima de trabajo confiable, distendido y respetuoso. Un
+                  momento para que puedas pensar (te) y reflexionar sobre lo que vos quieras.
+                  <br/><br/>
+                  ¡Éste es el momento! No te dejes para después...
+                </div>
+                <a class="button" href="https://calendly.com/ludmila-onorati/terapia-online" data-swiper-parallax-duration="1000" data-swiper-parallax="-700">
+                  Reserva tu turno
+                </a>
+              </div>
+            </div>
+        </div>
+        <!-- If we need pagination -->
+        <!-- <div class="swiper-pagination"></div> -->
+
+        <!-- If we need navigation buttons -->
+        <!-- <div class="swiper-button-prev"></div> -->
+        <!-- <div class="swiper-button-next"></div> -->
+
+        <!-- If we need scrollbar -->
+        <!-- <div class="swiper-scrollbar"></div> -->
+    </div>
+  </body>
+</html>
