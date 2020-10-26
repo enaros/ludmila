@@ -1,5 +1,6 @@
 * {
   font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
   -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
      -khtml-user-select: none; /* Konqueror HTML */
@@ -8,6 +9,30 @@
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Opera and Firefox */
 }
+
+::-webkit-scrollbar {
+    display: none; // Safari and Chrome
+}
+
+/* .diagonal {
+  position: relative;
+  background-color: transparent;
+}
+
+.diagonal::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  left: 0;
+  width: 100%;
+  height: 105px;
+  clip-path: polygon(0% 0%, 100% 50px, 100% 100%, 0% calc(100% - 50px));
+  background-color: #fecfbd;
+}
+
+.diagonal.white::before {
+  background-color: #fff;
+} */
 
 body {
   background-color:white;
@@ -31,12 +56,32 @@ body {
 }
 
 .swiper-slide {
-  overflow: scroll;
+  overflow: auto;
   background-color: #fecfbd;
 }
 
 .green-bg {
   background-color: #83afab;
+}
+
+.gumroad {
+  /* margin-top: 80px; */
+  width: 500px;
+}
+
+.gumroad-product-embed > a {
+  color: #fff;
+  text-align: center;
+  font-size: 18px;
+  text-decoration: none;
+  width: 100%;
+}
+
+@media (max-device-width: 480px) {
+  .gumroad {
+    width: 100%;
+    margin-top: 100px;
+  }
 }
 
 img {
@@ -50,6 +95,7 @@ img {
   height: 130px;
   /* transition: all 0.5s ease; */
   padding-top: 15px;
+  text-align: center;
 }
 
 #overlay {
@@ -58,13 +104,14 @@ img {
     background-color: #000;
     opacity: 0;
     transition: opacity 0.3s ease;
-    position: absolute;
+    position: fixed;
     z-index: 3;
     pointer-events: none;
 }
 #overlay.show {
   opacity: .6;
   display: block;
+  pointer-events: auto;
 }
 
 .parallax-girl {
@@ -78,16 +125,18 @@ img {
   width: 85%;
   height: 100vh;
   background-color: #fff;
+  background-color: #fefefe;
   transition: opacity 0.3s ease;
-  position: absolute;
+  position: fixed;
   right:0;
   top:0;
   z-index: 4;
   box-shadow: -5px 0 0 3px rgba(0,0,0,.2);
   transform: translateX(110%);
   transition: transform .3s ease;
-  padding-top: 200px;
-  padding-left: 30px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 #menu.show {
@@ -99,6 +148,18 @@ img {
   display: block;
   color: #333;
   padding: 15px 0;
+  flex: 0;
+  padding-left: 30px;
+  font-weight: 500;
+}
+
+#menu a.button {
+  margin-left: 30px;
+  margin-top: 15px;
+  width: 270px;
+  font-size: 25px;
+  text-align: center;
+  padding-left: 0;
 }
 
 
@@ -115,12 +176,20 @@ img {
   font-size: 20px;
 }
 
+a.link, a.link:visited, a.link:active {
+  color: #FB8A86;
+  text-decoration: none;
+}
+a.link:hover {
+  color: #333;
+}
+
 .t1 {
-    font-size: 34px;
+    font-size: 32px;
     font-weight: 600;
     line-height: 37px;
     position: absolute;
-    left: 40px;
+    margin-left: 40px;
     margin-top: -80px;
     text-shadow: 2px 2px 0px #fff;
     /* letter-spacing: 1px; */
@@ -129,8 +198,8 @@ img {
 }
 
 .t2 {
-  margin-left: 40px;
-  margin-right: 40px;
+  margin-left: 39px;
+  margin-right: 38px;
   margin-top: 15px;
   font-size: 18px;
   /* opacity: .5; */
@@ -144,4 +213,252 @@ img {
 .t2 strong {
   color: rgba(0,0,0,.7);
   font-weight: 800;
+}
+
+.social-media-icon {
+  width: 40px;
+  height: 40px;
+  margin-top: 40px;
+  margin-right: 20px;
+  opacity: .8;
+}
+
+body .swiper-pagination-bullet.swiper-pagination-bullet-active {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+body .swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+}
+
+@media (max-device-width: 480px) {
+  .terapia-presencial .parallax-girl {
+    top: 15px;
+  }
+  .ronda-mamas .parallax-girl {
+    top: 15px;
+  }
+
+  .hide-mobile {
+    display:none;
+  }
+
+  .diagonal::before {
+    display: none;
+  }
+
+  #menu a {
+    font-size: 25px;
+  }
+
+  /* .t1.contacto {
+    margin-top: -43px;
+    margin-left: 39px;
+  } */
+
+  .t2 {
+    padding-bottom: 70px;
+  }
+
+  .t1.smaller-title {
+    font-size: 24px;
+    padding-right: 30px;
+    line-height: 32px;
+  }
+}
+
+@media (min-device-width: 481px) {
+
+  .hide-laptop {
+    display: none!important;
+  }
+
+  #menu {
+    width: 40%;
+  }
+
+  body {
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+
+  .header img {
+    width: 400px;
+  }
+
+  .swiper-slide .left {
+    flex:0 1 auto;
+    max-width: 480px;
+  }
+
+  .swiper-slide .right {
+    flex:0 1 auto;
+    max-width: 480px;
+  }
+
+  .swiper-slide {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    /* max-width: 925px; */
+    justify-content: center;
+    padding-top: 113px;
+    overflow: hidden;
+    /* max-width: 500px; */
+  }
+
+  .swiper-slide:nth-child(2n) {
+    background-color: #fff;
+    flex-direction: row;
+  }
+
+  .swiper-slide:nth-child(2n) .bg-circle {
+    opacity: 0;
+  }
+
+  .t1 {
+    position: relative;
+    margin-top: 0;
+  }
+
+  .parallax-girl {
+     position: absolute;
+     width: 480px;
+     top: auto;
+     left: auto;
+  }
+
+  .swiper-wrapper {
+    display: block;
+    /* margin-top: 30px; */
+  }
+
+  .about-me {
+    flex-direction: column!important;
+  }
+  .about-me .right {
+    max-width: 580px;
+  }
+
+}
+
+#swipe-animation, #rotate-screen {
+  display: flex;
+  position: absolute;
+  z-index: 2;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  height: 100vh;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+#rotate-screen {
+  background-color: #FECFBD;
+  color: #fff;
+  display:none;
+}
+#rotate-screen img {
+  width: 42px;
+  flex: 0;
+}
+
+@media only screen and (orientation:landscape) and (max-device-width: 780px) {
+  #rotate-screen {
+    display: flex!important;
+  }
+}
+
+#swipe-animation img {
+  width: 42px;
+  /* margin-top: 30px; */
+  /* opacity: 1; */
+}
+
+.wobble-hor-bottom {
+	-webkit-animation: wobble-hor-bottom 3.8s infinite both; /*, desaparece 0.3s 4s 1 forwards;*/
+	        animation: wobble-hor-bottom 3.8s infinite both; /*, desaparece 0.3s 4s 1 forwards;*/
+}
+
+/* ----------------------------------------------
+ * Generated by Animista on 2020-4-21 10:31:1
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info.
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+
+@keyframes desaparece {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@-webkit-keyframes desaparece {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/**
+ * ----------------------------------------
+ * animation wobble-hor-bottom
+ * ----------------------------------------
+ */
+@-webkit-keyframes wobble-hor-bottom {
+  0%,
+  100% {
+    -webkit-transform: translateX(0%);
+            transform: translateX(0%);
+    -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+  }
+  15% {
+    -webkit-transform: translateX(-30px) rotate(-6deg);
+            transform: translateX(-30px) rotate(-6deg);
+  }
+  30% {
+    -webkit-transform: translateX(15px) rotate(6deg);
+            transform: translateX(15px) rotate(6deg);
+  }
+  45% {
+    -webkit-transform: translateX(-15px) rotate(-3.6deg);
+            transform: translateX(-15px) rotate(-3.6deg);
+  }
+  60% {
+    -webkit-transform: translateX(9px) rotate(2.4deg);
+            transform: translateX(9px) rotate(2.4deg);
+  }
+  75% {
+    -webkit-transform: translateX(-6px) rotate(-1.2deg);
+            transform: translateX(-6px) rotate(-1.2deg);
+  }
+}
+@keyframes wobble-hor-bottom {
+  0%,
+  100% {
+    -webkit-transform: translateX(0%);
+            transform: translateX(0%);
+    -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+  }
+  15% {
+    -webkit-transform: translateX(-30px) rotate(-6deg);
+            transform: translateX(-30px) rotate(-6deg);
+  }
+  30% {
+    -webkit-transform: translateX(15px) rotate(6deg);
+            transform: translateX(15px) rotate(6deg);
+  }
+  45% {
+    -webkit-transform: translateX(-15px) rotate(-3.6deg);
+            transform: translateX(-15px) rotate(-3.6deg);
+  }
+  60% {
+    -webkit-transform: translateX(9px) rotate(2.4deg);
+            transform: translateX(9px) rotate(2.4deg);
+  }
+  75% {
+    -webkit-transform: translateX(-6px) rotate(-1.2deg);
+            transform: translateX(-6px) rotate(-1.2deg);
+  }
 }
