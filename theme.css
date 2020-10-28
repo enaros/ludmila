@@ -264,6 +264,7 @@ body .swiper-pagination-bullet {
     font-size: 24px;
     padding-right: 30px;
     line-height: 32px;
+    margin-top: -110px;
   }
 }
 
