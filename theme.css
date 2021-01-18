@@ -294,7 +294,7 @@ body .swiper-pagination-bullet {
 
   .swiper-slide .right {
     flex:0 1 auto;
-    max-width: 480px;
+    max-width: 675px;
   }
 
   .swiper-slide {
@@ -338,7 +338,10 @@ body .swiper-pagination-bullet {
     flex-direction: column!important;
   }
   .about-me .right {
-    max-width: 580px;
+    max-width: 675px;
+  }
+  .about-me .t1 div {
+    display: inline-block;
   }
 
 }
