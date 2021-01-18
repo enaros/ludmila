@@ -221,6 +221,13 @@ a.link:hover {
   margin-top: 40px;
   margin-right: 20px;
   opacity: .8;
+  margin-bottom: -6px;
+}
+
+#count {
+  font-size: 38px;
+  display: inline-block;
+  margin-right: 20px;
 }
 
 body .swiper-pagination-bullet.swiper-pagination-bullet-active {
@@ -344,6 +351,12 @@ body .swiper-pagination-bullet {
     display: inline-block;
   }
 
+}
+
+@media (min-device-width: 481px) and (max-device-width: 1024px) {
+  .swiper-slide .right {
+    max-width: 524px;
+  }
 }
 
 #swipe-animation, #rotate-screen {

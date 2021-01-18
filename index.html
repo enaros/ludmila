@@ -113,6 +113,16 @@
         //   metaThemeColor.setAttribute("content", "#333333");
         // }, 3000);
 
+        // instagram count
+        const apicall2 = 'https://www.instagram.com/lic.ludmilaonorati/?__a=1';
+
+        fetch(apicall2).then(res => res.json()).then(json => {
+          console.log(json);
+          const c = json.graphql.user.edge_followed_by.count;
+          document.getElementById('count').innerHTML = c;
+        });
+
+
         //initialize swiper when document ready
 
         if (!isMobile) {
@@ -414,6 +424,7 @@
                   </div>
                   <div>
                     <a href="https://www.instagram.com/lic.ludmilaonorati/"><img src="img/i-instagram.svg" class="social-media-icon" data-swiper-parallax-y="200" data-swiper-parallax-duration="700"/></a>
+                    <span id="count"></span>
                     <a href="https://www.facebook.com/lic.ludmilaonorati/"><img src="img/i-facebook-round.svg" class="social-media-icon" data-swiper-parallax-y="200" data-swiper-parallax-duration="750"/></a>
                     <a href="https://www.linkedin.com/in/ludmila-onorati-978b4812/"><img src="img/i-linkedin-round.svg" class="social-media-icon" data-swiper-parallax-y="200" data-swiper-parallax-duration="800" /></a>
                   </div>
