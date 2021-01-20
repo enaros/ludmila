@@ -117,10 +117,12 @@
         const apicall2 = 'https://www.instagram.com/lic.ludmilaonorati/?__a=1';
 
         fetch(apicall2).then(res => res.json()).then(json => {
-          console.log(json);
           const c = json.graphql.user.edge_followed_by.count;
-          document.getElementById('count').innerHTML = c;
-        });
+          document.getElementById('count').innerHTML = Math.floor(parseInt(c) / 1000) + 'k';
+        }).
+        catch(error => {
+          console.log('There has been a problem with your fetch operation:', error);
+        });;
 
 
         //initialize swiper when document ready

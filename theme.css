@@ -225,9 +225,19 @@ a.link:hover {
 }
 
 #count {
-  font-size: 38px;
+  font-size: 12px;
   display: inline-block;
-  margin-right: 20px;
+  margin-right: 17px;
+  position: absolute;
+  font-weight: 500;
+  /* margin: 55px -9px 0px 0px; */
+  margin-top: 62px;
+  margin-left: -51px;
+  color: white;
+  background-color: #333;
+  padding: 0px 8px;
+  border-radius: 15px;
+  pointer-events: none;
 }
 
 body .swiper-pagination-bullet.swiper-pagination-bullet-active {
