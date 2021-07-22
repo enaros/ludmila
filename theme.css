@@ -215,6 +215,10 @@ a.link:hover {
   font-weight: 800;
 }
 
+.taller .t1 {
+  display: none!important;
+}
+
 .social-media-icon {
   width: 40px;
   height: 40px;
